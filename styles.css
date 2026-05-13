@@ -1,0 +1,366 @@
+/* ── Шрифты ─────────────────────────────────────────────────────────────── */
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=IBM+Plex+Sans:wght@400;500;600&display=swap');
+
+/* ── Переменные ─────────────────────────────────────────────────────────── */
+:root {
+  --bg:       #0f0f10;
+  --surface:  #18181b;
+  --border:   #2a2a2e;
+  --muted:    #6b6b74;
+  --text:     #e8e8ec;
+  --accent:   #e05c3a; /* Оранжевый остается для кнопок и таймера */
+  --good:     #3aae72; /* Зеленый */
+  --bad:      #e05c3a;
+  --radius:   6px;
+  --mono:     'IBM Plex Mono', monospace;
+  --sans:     'IBM Plex Sans', sans-serif;
+}
+
+/* ── Reset ──────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+  font-size: 15px;
+  line-height: 1.5;
+  min-height: 100vh;
+}
+
+/* ── Layout ──────────────────────────────────────────────────────────────── */
+.wrap {
+  max-width: 820px;
+  margin: 0 auto;
+  padding: 40px 20px 80px;
+}
+
+h1 {
+  font-family: var(--mono);
+  font-size: 1.9rem;
+  font-weight: 600;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+h1 .accent { color: var(--accent); }
+
+h2 {
+  font-family: var(--mono);
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 12px;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.sub {
+  color: var(--muted);
+  font-size: 0.9rem;
+  margin-bottom: 28px;
+}
+
+/* ── Panel ───────────────────────────────────────────────────────────────── */
+.panel {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 22px 24px;
+  margin-bottom: 20px;
+}
+
+/* ── Controls row ─────────────────────────────────────────────────────────── */
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px 14px;
+  margin-bottom: 18px;
+}
+
+.toggle-label {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  cursor: pointer;
+  font-size: 0.88rem;
+  color: var(--muted);
+}
+.toggle-label input { accent-color: var(--accent); }
+
+input[type="range"] {
+  accent-color: var(--accent);
+  width: 80px;
+}
+
+select {
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 4px 8px;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+/* ── Filter bar ──────────────────────────────────────────────────────────── */
+.filter-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+.filter-label {
+  font-size: 0.8rem;
+  margin-right: 2px;
+}
+.filter-btn {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--muted);
+  border-radius: 20px;
+  padding: 3px 11px;
+  font-size: 0.8rem;
+  font-family: var(--sans);
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s, background 0.15s;
+}
+.filter-btn:hover {
+  border-color: var(--accent);
+  color: var(--text);
+}
+.filter-btn.active {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+}
+
+/* ── Buttons ─────────────────────────────────────────────────────────────── */
+button {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text);
+  border-radius: var(--radius);
+  padding: 5px 14px;
+  font-family: var(--sans);
+  font-size: 0.88rem;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+}
+button:hover { border-color: var(--accent); color: var(--accent); }
+button.primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+button.primary:hover { background: #c94e2f; border-color: #c94e2f; color: #fff; }
+button:disabled { opacity: 0.4; cursor: not-allowed; }
+
+/* ── Timer ───────────────────────────────────────────────────────────────── */
+.timer {
+  font-family: var(--mono);
+  font-size: 1.1rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--accent);
+  min-width: 48px;
+}
+
+/* ── Target word ──────────────────────────────────────────────────────────── */
+.prompt-line {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+.target {
+  font-family: var(--mono);
+  font-size: 2.4rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  margin-bottom: 6px;
+  min-height: 3rem;
+  line-height: 1.2;
+}
+.srs-state {
+  font-size: 0.8rem;
+  margin-bottom: 14px;
+  min-height: 1.2em;
+  font-family: var(--mono);
+}
+
+/* ── Input ───────────────────────────────────────────────────────────────── */
+#input {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 1.2rem;
+  padding: 10px 14px;
+  outline: none;
+  transition: border-color 0.12s, background-color 0.12s;
+  margin-bottom: 6px;
+}
+
+/* Изменено: теперь обводка при фокусе всегда зеленая */
+#input:focus {
+  border-color: var(--good);
+}
+
+/* При ошибке меняется только фон, обводка остается зеленой в фокусе */
+#input.bad { 
+  background: #2a1410; 
+}
+
+#input:disabled { opacity: 0.35; }
+
+/* ── Hint ────────────────────────────────────────────────────────────────── */
+.hint-inline {
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  min-height: 1.2em;
+  margin-bottom: 14px;
+}
+
+/* ── Stats ───────────────────────────────────────────────────────────────── */
+.stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 14px;
+}
+.stat {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 8px 14px;
+  min-width: 72px;
+  text-align: center;
+}
+.stat .val {
+  font-family: var(--mono);
+  font-size: 1.2rem;
+  font-weight: 600;
+  line-height: 1.2;
+}
+.stat .lbl {
+  font-size: 0.72rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-top: 2px;
+}
+.score-stat {
+  border-color: var(--accent);
+}
+.score-stat .val { color: var(--accent); }
+
+/* ── Vocab panel ──────────────────────────────────────────────────────────── */
+textarea {
+  width: 100%;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  resize: vertical;
+  outline: none;
+  transition: border-color 0.12s;
+  margin-bottom: 10px;
+}
+textarea:focus { border-color: var(--good); } /* Здесь тоже сделал зеленую */
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 18px;
+}
+
+/* ── Flash ───────────────────────────────────────────────────────────────── */
+.add-flash {
+  font-size: 0.85rem;
+  color: var(--good);
+  opacity: 0;
+  transition: opacity 0.2s;
+  font-family: var(--mono);
+}
+.add-flash.show  { opacity: 1; }
+.add-flash.error { color: var(--bad); }
+
+/* ── DB list ──────────────────────────────────────────────────────────────── */
+.db-list {
+  overflow-x: auto;
+}
+.db-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1.6fr 70px 60px 90px 130px;
+  gap: 0;
+  border-bottom: 1px solid var(--border);
+  align-items: center;
+  font-size: 0.82rem;
+}
+.db-row > div {
+  padding: 7px 8px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.db-head {
+  color: var(--muted);
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  border-bottom: 1px solid var(--border);
+  position: sticky;
+  top: 0;
+  background: var(--surface);
+  z-index: 1;
+}
+.db-head [data-sort-key] { cursor: pointer; user-select: none; }
+.db-head [data-sort-key]:hover { color: var(--text); }
+.db-row:last-child { border-bottom: none; }
+.db-row:not(.db-head):hover { background: #1c1c20; }
+
+.db-cell-input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid transparent;
+  color: var(--text);
+  font-family: var(--mono);
+  font-size: 0.82rem;
+  padding: 2px 0;
+  outline: none;
+  transition: border-color 0.12s;
+}
+.db-cell-input:focus { border-bottom-color: var(--good); }
+
+.db-row button {
+  padding: 3px 8px;
+  font-size: 0.75rem;
+  margin-right: 4px;
+}
+
+/* ── Utility ─────────────────────────────────────────────────────────────── */
+.muted { color: var(--muted); }
+
+/* ── Mobile ──────────────────────────────────────────────────────────────── */
+@media (max-width: 600px) {
+  .target { font-size: 1.8rem; }
+  .db-row {
+    grid-template-columns: 1fr 1fr 52px 44px 72px 100px;
+    font-size: 0.75rem;
+  }
+  .stats { gap: 6px; }
+  .stat  { padding: 6px 10px; min-width: 60px; }
+  .stat .val { font-size: 1rem; }
+}
